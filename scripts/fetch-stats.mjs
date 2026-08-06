@@ -5,7 +5,7 @@ import { execSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const output = join(__dirname, '..', 'src', 'data', 'stats.json');
-const tmpRoot = join(process.env.TEMP || 'C:/Users/dimah/AppData/Local/Temp/opencode', 'sactum-stats');
+const tmpRoot = join(process.env.RUNNER_TEMP || process.env.TMPDIR || process.env.TEMP || '/tmp', 'sactum-stats');
 const repo = 'https://github.com/dimdimah/project-ai-skills-skill';
 
 const repoDir = join(tmpRoot, 'skillrepo-v2');
