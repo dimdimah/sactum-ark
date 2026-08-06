@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Debug Log",
+  "description": "Schema for systematic debugging log",
+  "type": "object",
+  "required": ["debug_id", "issue"],
+  "properties": {
+    "debug_id": {
+      "type": "string",
+      "description": "Unique debug session identifier"
+    },
+    "issue": {
+      "type": "string",
+      "description": "Brief description of the bug/issue"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["investigating", "resolved", "wont_fix", "duplicate"]
+    },
+    "symptoms": {
+      "type": "object",
+      "properties": {
+        "what": { "type": "string" },
+        "when": { "type": "string" },
+        "where": { "type": "string" },
+        "frequency": { "type": "string" },
+        "impact": { "type": "string" }
+      }
+    },
+    "reproduction_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step"],
+        "properties": {
+          "step": { "type": "string" },
+          "expected": { "type": "string" },
+          "actual": { "type": "string" }
+        }
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hypothesis"],
+        "properties": {
+          "hypothesis": { "type": "string" },
+          "supporting_evidence": { "type": "string" },
+          "contradicting_evidence": { "type": "string" },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+          "tested": { "type": "boolean" },
+          "result": { "type": "string" }
+        }
+      }
+    },
+    "root_cause": {
+      "type": "string"
+    },
+    "fix": {
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "files_changed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "regression_test": {
+      "type": "string",
+      "description": "Test added to prevent regression"
+    }
+  }
+}

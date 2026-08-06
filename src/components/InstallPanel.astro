@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro';
+
+interface Option {
+  id: string;
+  label: string;
+  command: string;
+}
+
+interface Props {
+  options: Option[];
+  defaultId?: string;
+}
+
+const { options, defaultId = options[0].id }: Props = Astro.props;
+---
+
+<div data-install-panel-root class="border border-line bg-surface">
+  <div class="h-1 bg-gradient-to-r from-accent via-accent-fill to-transparent" aria-hidden="true"></div>
+  <div data-install-tabs class="flex flex-wrap gap-1 border-b border-line bg-surface px-2 pt-2">
+    {options.map((opt) => (
+      <button
+        type="button"
+        data-install-tab={opt.id}
+        class="px-3 py-1.5 font-mono text-xs text-subtle transition-colors"
+        class:list={{ 'bg-[#382172] text-white': opt.id === defaultId }}
+      >
+        {opt.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="flex items-center gap-3 p-4">
+    <span aria-hidden="true" class="select-none font-mono text-sm text-subtle">$</span>
+    {options.map((opt) => (
+      <code
+        data-install-panel={opt.id}
+        class:list={{ hidden: opt.id !== defaultId }}
+        class="min-w-0 flex-1 overflow-x-auto whitespace-nowrap font-mono text-sm text-body"
+      >{opt.command}</code>
+    ))}
+    <button
+      type="button"
+      data-copy
+      data-copy-target-install
+      class="shrink-0 border border-line p-2 text-subtle transition-colors hover:border-[#382172] hover:text-accent"
+      aria-label="Salin perintah instal"
+    >
+      <span data-copy-icon-copy class="flex"><Icon name="copy" size={18} /></span>
+      <span data-copy-icon-done class="hidden text-accent"><Icon name="check" size={18} /></span>
+    </button>
+  </div>
+</div>

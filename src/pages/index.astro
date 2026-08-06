@@ -1,0 +1,493 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import SkillCard from '../components/SkillCard.astro';
+import InstallPanel from '../components/InstallPanel.astro';
+import { skills, topics, repoUrl } from '../data/skills.js';
+import statsData from '../data/stats.json';
+import { phases, agents, installOptions, footerSkills } from '../data/site.js';
+
+const stats = [
+  { value: String(skills.length), label: 'skill siap pakai' },
+  { value: '5', label: 'fase SDLC tercakup' },
+  { value: String(statsData.tests.node.passed), label: 'test PASS (Node)' },
+  { value: String(statsData.eval.score), label: 'skor eval (%)' },
+];
+---
+
+<Layout title="Sactum Ark | AI Skills Katalog">
+  <main class="min-h-screen bg-base text-body">
+    <!-- Nav -->
+    <header class="sticky top-0 z-50 border-b border-line bg-base/85 backdrop-blur-md">
+      <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+        <a href="/" class="flex items-center gap-2" aria-label="Sactum Ark, kembali ke beranda">
+          <span class="flex h-7 w-7 items-center justify-center bg-accent-fill font-mono text-sm font-bold text-accent-ink">S</span>
+          <span class="text-sm font-semibold tracking-tight text-heading">Sactum Ark</span>
+        </a>
+        <div class="hidden items-center gap-7 md:flex">
+          <a href="#alur" class="relative text-sm text-body transition-colors hover:text-heading after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full">Alur kerja</a>
+          <a href="#katalog" class="relative text-sm text-body transition-colors hover:text-heading after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full">Katalog</a>
+          <a href="/agents/" class="relative text-sm text-body transition-colors hover:text-heading after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full">Setup</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            data-theme-toggle
+            class="p-2 text-subtle transition-colors hover:text-heading"
+            aria-label="Ganti tema terang dan gelap"
+          >
+            <span data-theme-icon="light" class="hidden"><Icon name="sun" size={18} /></span>
+            <span data-theme-icon="dark" class="hidden"><Icon name="moon" size={18} /></span>
+          </button>
+          <a
+            href={repoUrl}
+            class="p-2 text-subtle transition-colors hover:text-heading"
+            aria-label="Buka repository GitHub"
+          >
+            <Icon name="github-logo" size={20} />
+          </a>
+          <button
+            type="button"
+            data-mobile-menu-toggle
+            class="p-2 text-subtle transition-colors hover:text-heading md:hidden"
+            aria-label="Buka menu"
+            aria-expanded="false"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><line x1="4" y1="6" x2="20" y2="6" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="18" x2="20" y2="18" /></svg>
+          </button>
+        </div>
+      </nav>
+      <div data-mobile-menu class="hidden border-t border-line bg-base px-6 pb-4 md:hidden">
+        <a href="#alur" class="block py-2 text-sm text-body transition-colors hover:text-heading">Alur kerja</a>
+        <a href="#katalog" class="block py-2 text-sm text-body transition-colors hover:text-heading">Katalog</a>
+        <a href="/agents/" class="block py-2 text-sm text-body transition-colors hover:text-heading">Setup</a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden border-b border-line">
+      <div class="bg-breath" aria-hidden="true"></div>
+      <div class="bg-lines" aria-hidden="true"></div>
+      <svg class="bg-waves" viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none" aria-hidden="true">
+        <path class="bw-dash" d="M-160 170 C 80 60, 220 280, 440 170 S 820 80, 1040 180 C 1240 260, 1360 120, 1600 190" />
+        <path class="bw-dash" d="M-160 270 C 120 370, 300 170, 520 280 S 900 170, 1120 290 C 1320 390, 1400 260, 1600 300" />
+        <path class="bw-dash" d="M-160 390 C 140 290, 340 490, 560 390 S 940 290, 1160 400 C 1340 490, 1430 350, 1600 410" />
+        <path class="bw-dash" d="M-160 510 C 160 610, 360 410, 580 510 S 960 420, 1180 530 C 1360 620, 1450 480, 1600 540" />
+        <path class="bw-dash" d="M-160 630 C 180 530, 380 730, 600 630 S 980 530, 1200 640 C 1380 730, 1470 590, 1600 650" />
+        <path class="bw-dash" d="M-160 750 C 200 850, 400 650, 620 750 S 1000 660, 1220 770 C 1400 860, 1490 720, 1600 790" />
+        <path class="bw-dash" d="M-160 170 C 80 60, 220 280, 440 170 S 820 80, 1040 180 C 1240 260, 1360 120, 1600 190" />
+      </svg>
+      <div
+        class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-accent-fill/[0.12] blur-3xl"
+        style="animation: hero-orb-1 20s ease-in-out infinite"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="pointer-events-none absolute -bottom-40 -left-40 h-72 w-72 rounded-full bg-accent-fill/[0.08] blur-3xl"
+        style="animation: hero-orb-2 25s ease-in-out infinite"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="pointer-events-none absolute -right-20 top-20 h-64 w-64 rounded-full bg-accent-fill/[0.15] blur-3xl"
+        style="animation: hero-orb-3 18s ease-in-out infinite"
+        aria-hidden="true"
+      ></div>
+      <div class="relative mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:pb-24 lg:pt-28">
+        <div class="reveal">
+          <span class="inline-flex items-center border border-accent/40 bg-accent-fill/40 px-3 py-1 text-xs font-medium text-accent">
+            Katalog AI skills
+          </span>
+          <h1 class="mt-8 max-w-xl text-5xl font-bold tracking-tight text-heading transition-colors hover:text-accent sm:text-6xl lg:text-7xl">
+            SDLC yang konsisten untuk setiap agent.
+          </h1>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-body sm:text-xl">
+            12 skill teruji untuk Plan, Build, Verify, Deploy, dan Handoff. Pasang lewat satu perintah, aktif otomatis di agent kamu.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <Button href="#katalog" variant="primary" size="lg">
+              Lihat katalog
+            </Button>
+            <a href="#pasang" class="text-sm font-medium text-body transition-colors hover:text-accent">
+              Cara pasang
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal lg:justify-self-end lg:w-full lg:max-w-md" style="transition-delay: 120ms">
+          <InstallPanel options={installOptions} defaultId="cli" />
+          <p class="mt-4 text-xs leading-relaxed text-subtle">
+            Semua perintah nyata dan siap disalin. Repo dan skill di bawah lisensi terbuka.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats strip -->
+    <section class="border-b border-line bg-surface">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-10 sm:grid-cols-4 lg:px-8">
+        {stats.map((stat, i) => (
+          <div class="reveal" style={`transition-delay: ${i * 60}ms`}>
+            <div class="font-mono text-3xl font-bold tracking-tight text-accent sm:text-4xl">{stat.value}</div>
+            <div class="mt-1 text-sm text-subtle">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SDLC timeline -->
+    <section id="alur" class="relative border-b border-line">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" aria-hidden="true"></div>
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+        <div class="reveal max-w-2xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Alur kerja</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            Satu urutan dari ide sampai rilis. Setiap fase punya skill yang menjalankan bagiannya dan gerbang kualitas sendiri.
+          </p>
+        </div>
+
+        <div class="mt-12 max-w-3xl">
+          {phases.map((phase, i) => (
+            <div class="reveal grid gap-4 border-t border-line py-6 sm:grid-cols-[8rem_1fr] sm:gap-8" style={`transition-delay: ${i * 70}ms`}>
+              <div class="font-mono text-sm font-medium uppercase tracking-wide text-accent">{phase.title}</div>
+              <p class="text-sm leading-relaxed text-body sm:mt-0">{phase.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills catalog -->
+    <section id="katalog" class="relative border-b border-line bg-surface">
+      <div class="absolute inset-0 gradient-accent opacity-[0.03]" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+        <div class="reveal flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div class="max-w-2xl">
+            <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Semua skill</h2>
+            <p class="mt-3 text-base leading-relaxed text-body">
+              12 skill untuk setiap tahap pengembangan. Pilih sesuai kebutuhan, atau pasang semuanya.
+            </p>
+          </div>
+          <a href={repoUrl} class="group inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+            Lihat di GitHub
+            <Icon name="arrow-up-right" size={16} class="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        </div>
+
+        <div class="reveal mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div class="relative w-full lg:max-w-sm">
+            <span aria-hidden="true" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle">
+              <Icon name="terminal" size={16} />
+            </span>
+            <input
+              data-catalog-search
+              type="search"
+              placeholder="Cari skill…"
+              aria-label="Cari skill"
+              class="h-11 w-full border border-line bg-base pl-9 pr-4 text-sm text-heading transition-colors placeholder:text-subtle hover:border-accent/60 focus:border-accent"
+            />
+          </div>
+          <p class="text-sm text-subtle" data-catalog-count>{skills.length} skill</p>
+        </div>
+
+        <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter katalog berdasarkan topik">
+          <button
+            type="button"
+            data-topic-pill="all"
+            aria-pressed="true"
+            class="border border-accent bg-accent-fill px-3 py-1.5 font-mono text-xs text-accent-ink"
+          >
+            Semua
+          </button>
+          {topics.map((t) => (
+            <button
+              type="button"
+              data-topic-pill={t.id}
+              aria-pressed="false"
+              class="border border-line px-3 py-1.5 font-mono text-xs text-subtle transition-colors hover:border-accent hover:text-heading"
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((skill, i) => (
+            <div class="reveal" data-skill-item style={`transition-delay: ${(i % 3) * 60}ms`}>
+              <SkillCard
+                name={skill.name}
+                topic={skill.topic}
+                icon={skill.icon}
+                title={skill.title}
+                description={skill.description}
+                tags={skill.tags}
+                install={skill.install}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div data-catalog-empty hidden class="mt-6 border border-dashed border-line p-12 text-center">
+          <p class="text-sm text-body">Tidak ada skill yang cocok dengan pencarian atau filter ini.</p>
+          <button
+            type="button"
+            data-catalog-reset
+            class="mt-4 border border-line bg-surface px-4 py-2 font-mono text-xs text-subtle transition-colors hover:border-accent hover:text-heading"
+          >
+            Reset filter
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agents -->
+    <section class="relative border-b border-line">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" aria-hidden="true"></div>
+      <div class="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+        <div class="reveal">
+          <h2 class="text-center text-sm font-medium text-body">Kompatibel dengan agent yang kamu pakai</h2>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+            {agents.map((agent) => (
+              <img
+                src={`https://cdn.simpleicons.org/${agent.slug}/a1a1aa`}
+                alt={agent.name}
+                width="28"
+                height="28"
+                class="h-6 w-auto transition-all duration-300 hover:scale-110 hover:brightness-150"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="pasang" class="relative overflow-hidden">
+      <div class="bg-wave-fade" aria-hidden="true"></div>
+      <div class="absolute inset-0 gradient-accent opacity-[0.04]" aria-hidden="true"></div>
+      <div
+        class="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-accent to-transparent"
+        aria-hidden="true"
+      ></div>
+      <div class="mx-auto max-w-3xl px-6 py-24 text-center lg:px-8">
+        <div class="reveal">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Pasang sekarang.</h2>
+          <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-body">
+            Salin perintah di bawah, jalankan di terminal, dan semua {skills.length} skill terpasang sekaligus.
+          </p>
+          <div class="mx-auto mt-8 max-w-lg text-left">
+            <InstallPanel options={[installOptions[0]]} defaultId="cli" />
+          </div>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button href="/agents/" variant="primary" size="lg">
+              Setup di agent
+            </Button>
+            <Button href={repoUrl} variant="outline" size="lg">
+              Lihat di GitHub
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative border-t border-line bg-surface">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" aria-hidden="true"></div>
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <div class="col-span-2 md:col-span-1">
+            <a href="/" class="flex items-center gap-2" aria-label="Sactum Ark">
+              <span class="flex h-7 w-7 items-center justify-center bg-accent-fill font-mono text-sm font-bold text-accent-ink">S</span>
+              <span class="text-sm font-semibold tracking-tight text-heading">Sactum Ark</span>
+            </a>
+            <p class="mt-4 text-sm leading-relaxed text-subtle">Katalog skill untuk AI coding agent yang mengerjakan SDLC dengan disiplin.</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-heading">Skill</h3>
+            <ul class="mt-4 space-y-2.5 text-sm text-body">
+              {footerSkills.map((s) => (
+                <li><a href={s.href} class="transition-colors hover:text-heading">{s.title}</a></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-heading">Sumber</h3>
+            <ul class="mt-4 space-y-2.5 text-sm text-body">
+              <li><a href={repoUrl} class="transition-colors hover:text-heading">GitHub</a></li>
+              <li><a href={`${repoUrl}/issues`} class="transition-colors hover:text-heading">Issues</a></li>
+              <li><a href={`${repoUrl}/discussions`} class="transition-colors hover:text-heading">Discussions</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-heading">Konten</h3>
+            <ul class="mt-4 space-y-2.5 text-sm text-body">
+              <li><a href="#katalog" class="transition-colors hover:text-heading">Katalog skill</a></li>
+              <li><a href="#alur" class="transition-colors hover:text-heading">Alur kerja</a></li>
+              <li><a href="/agents/" class="transition-colors hover:text-heading">Setup di agent</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line pt-8 sm:flex-row">
+          <p class="text-xs text-subtle">Sactum Ark · 2026 · AI-native engineering</p>
+          <div class="flex items-center gap-3">
+            <a href={repoUrl} class="p-2 text-subtle transition-colors hover:text-heading" aria-label="GitHub">
+              <Icon name="github-logo" size={18} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const applyThemeIcons = () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      document.querySelectorAll('[data-theme-icon]').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        htmlEl.classList.toggle('hidden', htmlEl.dataset.themeIcon !== (isDark ? 'light' : 'dark'));
+      });
+    };
+    if (themeToggle) {
+      applyThemeIcons();
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('sactum-theme', next);
+        applyThemeIcons();
+      });
+    }
+
+    const searchInput = document.querySelector('[data-catalog-search]');
+    const pills = Array.from(document.querySelectorAll('[data-topic-pill]'));
+    const items = Array.from(document.querySelectorAll('[data-skill-item]'));
+    const count = document.querySelector('[data-catalog-count]');
+    const empty = document.querySelector('[data-catalog-empty]');
+    const resetBtn = document.querySelector('[data-catalog-reset]');
+
+    if (searchInput && items.length) {
+      let activeTopic = 'all';
+      const updatePills = () => {
+        pills.forEach((p) => {
+          const htmlP = p as HTMLElement;
+          const on = htmlP.dataset.topicPill === activeTopic;
+          htmlP.setAttribute('aria-pressed', String(on));
+          htmlP.classList.toggle('border-accent', on);
+          htmlP.classList.toggle('bg-accent-fill', on);
+          htmlP.classList.toggle('text-accent-ink', on);
+        });
+      };
+      const apply = () => {
+        const q = ((searchInput as HTMLInputElement).value || '').trim().toLowerCase();
+        let visible = 0;
+        items.forEach((item) => {
+          const card = item.querySelector('[data-skill-card]');
+          const htmlCard = card as HTMLElement;
+          const inTopic = activeTopic === 'all' || htmlCard.dataset.topic === activeTopic;
+          const inQuery = !q || (htmlCard.dataset.search || '').includes(q);
+          const show = inTopic && inQuery;
+          (item as HTMLElement).hidden = !show;
+          if (show) visible += 1;
+        });
+        if (count) count.textContent = visible === items.length ? `${items.length} skill` : `${visible} dari ${items.length} skill`;
+        if (empty) (empty as HTMLElement).hidden = visible !== 0;
+      };
+      searchInput.addEventListener('input', apply);
+      pills.forEach((p) =>
+        p.addEventListener('click', () => {
+          const htmlP = p as HTMLElement;
+          activeTopic = htmlP.dataset.topicPill || 'all';
+          updatePills();
+          apply();
+        })
+      );
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          activeTopic = 'all';
+          (searchInput as HTMLInputElement).value = '';
+          updatePills();
+          apply();
+          (searchInput as HTMLInputElement).focus();
+        });
+      }
+    }
+
+    document.querySelectorAll('[data-install-panel-root]').forEach((panelRoot) => {
+      const tabs = panelRoot.querySelectorAll('[data-install-tab]');
+      const panels = panelRoot.querySelectorAll('[data-install-panel]');
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const htmlTab = tab as HTMLElement;
+          const id = htmlTab.dataset.installTab;
+          tabs.forEach((t) => {
+            const htmlT = t as HTMLElement;
+            const active = htmlT.dataset.installTab === id;
+            htmlT.classList.toggle('bg-accent-fill/10', active);
+            htmlT.classList.toggle('text-accent', active);
+          });
+          panels.forEach((p) => {
+            const htmlP = p as HTMLElement;
+            htmlP.classList.toggle('hidden', htmlP.dataset.installPanel !== id);
+          });
+        });
+      });
+    });
+
+    const copyText = (text: string) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise<void>((resolve) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        resolve();
+      });
+    };
+
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest('[data-copy]') || null;
+      if (!btn) return;
+      const htmlBtn = btn as HTMLElement;
+      let text = htmlBtn.getAttribute('data-copy-text');
+      if (htmlBtn.hasAttribute('data-copy-target-install')) {
+        const panelRoot = htmlBtn.closest('[data-install-panel-root]');
+        const active = panelRoot ? panelRoot.querySelector('[data-install-panel]:not(.hidden)') : null;
+        text = active ? active.textContent.trim() : '';
+      }
+      if (!text) return;
+      copyText(text).then(() => {
+        const copyIcon = htmlBtn.querySelector('[data-copy-icon-copy]');
+        const doneIcon = htmlBtn.querySelector('[data-copy-icon-done]');
+        copyIcon?.classList.add('hidden');
+        doneIcon?.classList.remove('hidden');
+        setTimeout(() => {
+          doneIcon?.classList.add('hidden');
+          copyIcon?.classList.remove('hidden');
+        }, 1600);
+      });
+    });
+
+    const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    if (mobileMenuToggle && mobileMenu) {
+      mobileMenuToggle.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden', isOpen);
+        mobileMenuToggle.setAttribute('aria-expanded', String(!isOpen));
+      });
+    }
+  </script>
+</Layout>

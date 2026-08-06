@@ -1,0 +1,170 @@
+[
+  {
+    "name": "project-orchestrator",
+    "topic": "build",
+    "icon": "tree-structure",
+    "title": "Project Orchestrator",
+    "description": "Gunakan skill ini setiap kali user meminta membuat project baru, membangun aplikasi, membuat fitur baru, melakukan fullstack development, implementasi backend, implementasi frontend, refactor kode, bug fixing, deployment, code review, atau software architecture. Skill ini adalah MASTER ORCHESTRATOR yang mengatur seluruh alur Software Development Lifecycle (SDLC) — mulai dari requirement analysis sampai completion report — dan memastikan AI mengikuti urutan kerja yang benar, tidak melompati quality gate, serta tidak menyelesaikan task sebelum semua kriteria selesai terpenuhi. Trigger untuk hampir semua task software engineering, baik untuk project Laravel, Next.js, React, Astro, Vue, API, fullstack, mobile backend, dashboard, maupun microservice.",
+    "tags": [
+      "orchestrator",
+      "sdlc",
+      "master"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill project-orchestrator",
+    "longDescription": "Project Orchestrator adalah skill master yang mengatur seluruh alur Software Development Lifecycle (SDLC) dengan 13 tahap terstruktur. Ia tidak menulis kode, tetapi memastikan setiap task mengikuti urutan kerja yang benar: dari requirement analysis sampai completion report. Dengan quality gate dan retry policy yang ketat, skill ini mencegah AI melompati tahapan penting sebelum deployment."
+  },
+  {
+    "name": "security-audit",
+    "topic": "security",
+    "icon": "shield-check",
+    "title": "Security Audit",
+    "description": "Gunakan skill ini ketika user meminta audit security, security review, penetration test, vulnerability assessment, SOC scan, CSIRT/CERT investigation, cek keamanan project, audit keamanan aplikasi, audit OWASP top 10, cek SQL injection, XSS, IDOR, broken authentication, atau scanning vulnerability. Skill ini melakukan automated triage + manual review guidance + incident response playbook untuk menemukan dan merespons celah keamanan dalam codebase project.",
+    "tags": [
+      "security",
+      "audit",
+      "owasp"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill security-audit",
+    "longDescription": "Security Audit menjalankan 5 modul audit secara otomatis: static analysis, dependency check, config audit, secrets audit, dan prompt-injection guard. Skill ini menghasilkan prioritized findings dan menegakkan security gate yang memblokir deploy jika ada finding critical atau high. Cocok untuk SOC scan, CSIRT investigation, dan pre-commit security validation."
+  },
+  {
+    "name": "session-handoff",
+    "topic": "team",
+    "icon": "bookmark-simple",
+    "title": "Session Handoff",
+    "description": "Gunakan skill ini ketika agent akan mengakhiri sesi kerja, user ingin menyimpan progres sebelum pindah task, sesi berikutnya akan melanjutkan pekerjaan yang belum selesai, atau user meminta \"buat handoff\", \"simpan progres\", \"serah terima kerjaan\", \"ringkas progres sesi ini\", \"lanjutkan nanti\", \"handoff document\", atau \"session summary\". Skill ini mengubah state pekerjaan agent (status, keputusan, todo lanjutan, gotchas) menjadi dokumen handoff yang rapi dan bisa dipakai ulang — sehingga sesi berikutnya atau manusia bisa melanjutkan tanpa membaca seluruh percakapan.",
+    "tags": [
+      "handoff",
+      "session",
+      "continuity"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill session-handoff",
+    "longDescription": "Session Handoff merangkum seluruh pekerjaan agent dalam satu sesi menjadi dokumen handoff yang mudah dibaca. Dokumen ini mencakup status pekerjaan, keputusan yang diambil, todo lanjutan, dan gotchas yang perlu diperhatikan. Sesi berikutnya atau manusia bisa melanjutkan tanpa harus membaca seluruh percakapan."
+  },
+  {
+    "name": "git-history-archaeologist",
+    "topic": "docs",
+    "icon": "git-branch",
+    "title": "Git History Archaeologist",
+    "description": "Gunakan skill ini ketika user bertanya \"kenapa kode ini begini\", \"kenapa file ini ada\", \"siapa yang menulis baris ini\", \"kapan ini berubah\", \"kenapa dependency ini dipakai\", \"apa alasan keputusan ini\", \"git blame\", \"git log\", \"git bisect\", \"sejarah kode\", \"onboarding ke codebase\", atau ingin memahami asal-usul dan alasan historis di balik kode sebelum refactor. Skill ini menggali git history (blame, log, bisect) untuk merangkum alasan historis di balik keputusan kode.",
+    "tags": [
+      "git",
+      "history",
+      "refactor"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill git-history-archaeologist",
+    "longDescription": "Git History Archaeologist menggali git history menggunakan blame, log, pickaxe, dan bisect untuk menjawab pertanyaan kenapa kode ini begini. Skill ini merangkum alasan historis di balik keputusan kode, yang sangat krusial sebelum refactor atau saat onboarding anggota tim baru."
+  },
+  {
+    "name": "tdd-workflow",
+    "topic": "verify",
+    "icon": "flask",
+    "title": "TDD Workflow",
+    "description": "Gunakan skill ini ketika user meminta membuat fitur baru yang melibatkan logika transaksi, perhitungan, stok, atau business logic yang kompleks — di mana bug dapat lolos tanpa test otomatis. Skill ini memaksa AI mengikuti siklus TDD yang ketat: RED (tulis test yang gagal dulu), GREEN (tulis implementasi minimum agar test pass), REFACTOR (rapikan kode). Ada guardrail yang mencegah AI \"curang\" melewatkan testing dengan alasan \"ini sederhana\". Trigger: \"buat feature\", \"implementasi logika bisnis\", \"fitur perhitungan\", \"stok\", \"TDD\", \"test-first\", \"tdd workflow\".",
+    "tags": [
+      "tdd",
+      "testing",
+      "red-green-refactor"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill tdd-workflow",
+    "longDescription": "TDD Workflow memaksa siklus Test-Driven Development: RED (tulis test yang gagal), GREEN (implementasi minimum), REFACTOR (perbaiki kode tanpa merusak test). Skill ini dirancang khusus untuk logika bisnis, perhitungan, stok, dan transaksi, area yang butuh ketelitian tinggi dan perlindungan dari regression."
+  },
+  {
+    "name": "verification-loop",
+    "topic": "verify",
+    "icon": "check-circle",
+    "title": "Verification Loop",
+    "description": "Gunakan skill ini setiap kali sebelum menganggap kerjaan \"selesai\" — otomatis menjalankan checklist verifikasi: syntax/type check, test suite, lint, security scan dasar, performa baseline. Berfungsi sebagai reviewer otomatis yang memastikan tidak ada kode yang di-deploy dalam kondisi broken, tidak ter-test, atau ada vulnerability. Trigger: \"selesai ya?\", \"siap deploy\", \"cek sebelum push\", \"verification\", \"pre-deploy checklist\", \"code review otomatis\".",
+    "tags": [
+      "verification",
+      "quality",
+      "deploy"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill verification-loop",
+    "longDescription": "Verification Loop berfungsi sebagai reviewer otomatis sebelum task dianggap selesai. Checklist meliputi syntax check, type check, test suite, lint, security scan, dan performa baseline. Skill ini mencegah deployment jika ada yang gagal, memastikan hanya kode yang lolos semua gate yang bisa masuk produksi."
+  },
+  {
+    "name": "webapp-testing",
+    "topic": "verify",
+    "icon": "browser",
+    "title": "Webapp Testing",
+    "description": "Gunakan skill ini ketika perlu menguji aplikasi web dari end-to-end — mensimulasikan user yang klik, isi form, navigate, dan memverifikasi alur kerja dari awal sampai akhir. Cocok untuk memastikan fitur dengan banyak role/akses (siapa boleh lihat/edit apa) benar-benar jalan sesuai aturan, bukan cuma \"keliatan jalan\" pas dicoba manual. Trigger: \"e2e test\", \"web testing\", \"playwright\", \"cypress\", \"end to end\", \"test alur user\", \"role based testing\".",
+    "tags": [
+      "e2e",
+      "testing",
+      "playwright"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill webapp-testing",
+    "longDescription": "Webapp Testing memberikan panduan lengkap untuk end-to-end testing aplikasi web. Skill ini fokus pada simulasi user behavior: klik, isi form, navigasi, dan verifikasi alur kerja. Role-based access testing memastikan setiap role bisa akses sesuai aturan dan tidak ada privilege escalation."
+  },
+  {
+    "name": "domain-modeling",
+    "topic": "planning",
+    "icon": "database",
+    "title": "Domain Modeling",
+    "description": "Gunakan skill ini sebelum mulai ngoding untuk memodelkan entitas data dan relasinya — apa objek/objek utamanya, gimana hubungan antar objek, aturan bisnis apa yang berlaku. Ini proses mental yang dipakai buat bikin ERD atau data model, sekaligus latihan berpikir seperti System Analyst. Trigger: \"ERD\", \"data model\", \"entitas\", \"relationship\", \"domain modeling\", \"entity relationship\", \"sebelum ngoding\", \"desain dulu\".",
+    "tags": [
+      "domain",
+      "erd",
+      "modeling"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill domain-modeling",
+    "longDescription": "Domain Modeling adalah skill untuk memetakan entitas, atribut, relasi, dan aturan bisnis sebelum mulai ngoding. Skill ini menghasilkan model data yang konsisten dan validated, yang bisa langsung diimplementasikan ke schema database. Cocok dipakai sebelum project-orchestrator masuk ke tahap implementasi."
+  },
+  {
+    "name": "planning-workflow",
+    "topic": "planning",
+    "icon": "clipboard-text",
+    "title": "Planning Workflow",
+    "description": "Gunakan skill ini ketika user punya ide/requirement yang masih mentah dan perlu diubah jadi rencana implementasi yang terstruktur — dari PRD (Product Requirement Document) sampai breakdown task, asumsi, risiko, urutan eksekusi. Skill ini merger dari to-prd + writing-plans, cocok untuk latihan berpikir sebagai Business Analyst/System Analyst. Trigger: \"PRD\", \"product requirement\", \"rencana implementasi\", \"implementation plan\", \"deskripsikan kebutuhan\", \"breakdown task\", \"before coding\", \"to PRD\", \"writing plan\".",
+    "tags": [
+      "planning",
+      "prd",
+      "requirements"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill planning-workflow",
+    "longDescription": "Planning Workflow menggabungkan PRD generation dan implementation planning dalam satu alur: dari ide mentah, requirement gathering, PRD lengkap, sampai breakdown task, asumsi, dan risiko. Skill ini memastikan tidak ada yang ambigu sebelum coding dimulai."
+  },
+  {
+    "name": "strategic-compact",
+    "topic": "team",
+    "icon": "archive",
+    "title": "Strategic Compact",
+    "description": "Gunakan skill ini untuk meringkas dan menyimpan konteks penting selama sesi kerja panjang — keputusan yang sudah diambil, batasan yang ditemukan, pilihan arsitektur. Ini mencegah AI \"lupa\" atau kualitas jawabannya menurun karena context terlalu penuh. Cocok untuk task yang memakan banyak file dan sesi. Trigger: \"kompakkan konteks\", \"simpan keputusan penting\", \"apa saja yang sudah dipilih\", \"strategic compact\", \"compact context\", \"summary keputusan\".",
+    "tags": [
+      "compact",
+      "context",
+      "memory"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill strategic-compact",
+    "longDescription": "Strategic Compact merangkum konteks penting selama sesi panjang kerja agent. Ringkasan ini mencakup keputusan yang diambil, constraint yang dihadapi, dan trade-off yang dilakukan. Sangat berguna untuk sesi berikutnya agar AI tidak lupa konteks penting tanpa harus membaca seluruh percakapan."
+  },
+  {
+    "name": "systematic-debugging",
+    "topic": "build",
+    "icon": "bug",
+    "title": "Systematic Debugging",
+    "description": "Gunakan skill ini untuk pendekatan debugging yang terstruktur — mempersempit kemungkinan penyebab satu per satu berdasarkan bukti, bukan asal coba-coba ganti kode sampai kebetulan jalan. Melatih pola pikir menelusuri akar masalah. Trigger: \"bug\", \"error\", \"debug\", \"gagal\", \"kenapa ini error\", \"systematic debugging\", \"investigate error\", \"root cause\".",
+    "tags": [
+      "debugging",
+      "bug",
+      "investigation"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill systematic-debugging",
+    "longDescription": "Systematic Debugging mengajarkan pendekatan berbasis bukti: observe (pengamatan), reproduce (reproduksi bug), hypothesize (hipotesis), test (verifikasi hipotesis), fix (perbaikan), dan prevent (mencegah terulang). Skill ini mencegah AI melakukan trial-and-error yang membuang waktu."
+  },
+  {
+    "name": "diagram-generator",
+    "topic": "docs",
+    "icon": "chart-line",
+    "title": "Diagram Generator",
+    "description": "Gunakan skill ini ketika perlu membuat diagram UML (Use Case, Class, Sequence, Activity, ER Diagram) untuk visualisasi kebutuhan, arsitektur, atau alur sistem. Skill ini menghasilkan sintaks Mermaid.js yang bisa dirender langsung di GitHub, Notion, VS Code, atau markdown viewer lain. Trigger: \"diagram\", \"UML\", \"use case diagram\", \"class diagram\", \"sequence diagram\", \"activity diagram\", \"ERD\", \"entity relationship\", \"bisa gambarkan\", \"visualisasikan\".",
+    "tags": [
+      "diagram",
+      "uml",
+      "mermaid"
+    ],
+    "install": "npx skills add https://github.com/dimdimah/project-ai-skills-skill --skill diagram-generator",
+    "longDescription": "Diagram Generator menghasilkan diagram UML dalam sintaks Mermaid.js yang bisa langsung di-render di GitHub, Notion, atau VS Code. Mendukung ER Diagram, Use Case Diagram, Class Diagram, Sequence Diagram, dan Activity Diagram. Cocok untuk dokumentasi arsitektur dan komunikasi tim."
+  }
+]

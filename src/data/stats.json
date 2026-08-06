@@ -1,0 +1,37 @@
+{
+  "source": "dimdimah/project-ai-skills-skill",
+  "sourceUrl": "https://github.com/dimdimah/project-ai-skills-skill",
+  "generatedAt": "2026-08-06T03:03:44.886Z",
+  "repo": {
+    "name": "project-orchestrator-skill",
+    "version": "1.0.0",
+    "skills": 12,
+    "lastCommit": {
+      "sha": "bf1da9d",
+      "iso": "2026-08-05T15:34:16+07:00",
+      "dateLabel": "2026-08-05",
+      "message": "docs: fix pause note to reference actual commit e094a12"
+    }
+  },
+  "tests": {
+    "node": {
+      "total": 499,
+      "passed": 497,
+      "failed": 0
+    },
+    "python": {
+      "total": 8,
+      "passed": 8,
+      "failed": 0
+    },
+    "ok": true
+  },
+  "eval": {
+    "score": 100,
+    "queriesMatched": 50,
+    "queriesTotal": 50,
+    "structuralPassed": 12,
+    "structuralTotal": 12,
+    "ok": true
+  }
+}

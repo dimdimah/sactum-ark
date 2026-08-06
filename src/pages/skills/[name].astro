@@ -1,0 +1,341 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import InstallPanel from '../../components/InstallPanel.astro';
+import { skills as allSkills, repoUrl } from '../../data/skills.js';
+import { agents, installSkillCommand } from '../../data/agents.js';
+import { marked } from 'marked';
+import skillsContent from '../../data/skills-content.json';
+import statsData from '../../data/stats.json';
+
+export function getStaticPaths() {
+  return allSkills.map((skill) => ({
+    params: { name: skill.name },
+    props: { skill },
+  }));
+}
+
+const { skill } = Astro.props;
+
+const related = allSkills.filter((s) => s.name !== skill.name).slice(0, 3);
+
+const skillContent = skillsContent[skill.name];
+const mdHtml = skillContent ? marked.parse(skillContent.content) : '';
+
+const usageSteps = [
+  { title: 'Pasang lewat CLI', detail: 'Jalankan perintah instal di terminal proyek atau global.' },
+  { title: 'Aktifkan di agent', detail: 'Tambahkan skill ke konfigurasi agent yang kamu pakai.', href: '/agents/', linkText: 'Panduan per agent' },
+  { title: 'Kerja seperti biasa', detail: 'Skill aktif otomatis saat konteks yang relevan muncul.' },
+];
+---
+
+<Layout title={`${skill.title} | Sactum Ark`}>
+  <main class="min-h-screen bg-base text-body">
+    <!-- Nav -->
+    <header class="sticky top-0 z-50 border-b border-line bg-base/85 backdrop-blur-md">
+      <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+        <a href="/" class="flex items-center gap-2" aria-label="Kembali ke beranda Sactum Ark">
+          <span class="flex h-7 w-7 items-center justify-center bg-accent-fill font-mono text-sm font-bold text-accent-ink">S</span>
+          <span class="text-sm font-semibold tracking-tight text-heading">Sactum Ark</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            data-theme-toggle
+            class="p-2 text-subtle transition-colors hover:text-heading"
+            aria-label="Ganti tema terang dan gelap"
+          >
+            <span data-theme-icon="light" class="hidden"><Icon name="sun" size={18} /></span>
+            <span data-theme-icon="dark" class="hidden"><Icon name="moon" size={18} /></span>
+          </button>
+          <a
+            href={repoUrl}
+            class="p-2 text-subtle transition-colors hover:text-heading"
+            aria-label="Buka repository GitHub"
+          >
+            <Icon name="github-logo" size={20} />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="border-b border-line bg-surface" aria-label="Breadcrumb">
+      <div class="mx-auto flex h-10 max-w-7xl items-center gap-2 px-6 text-sm text-subtle lg:px-8">
+        <a href="/" class="transition-colors hover:text-heading">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/#katalog" class="transition-colors hover:text-heading">Skill</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-body">{skill.title}</span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
+        <div class="reveal max-w-3xl">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center bg-accent-fill/10 text-accent">
+              <Icon name={skill.icon} size={20} />
+            </span>
+            <span class="border border-line bg-surface px-3 py-1 text-xs font-medium text-body">
+              {skill.tags[0]}
+            </span>
+          </div>
+          <h1 class="mt-6 text-3xl font-semibold tracking-tight text-heading sm:text-4xl lg:text-5xl">
+            {skill.title}
+          </h1>
+          <p class="mt-5 text-base leading-relaxed text-body sm:text-lg">{skill.longDescription}</p>
+          <dl class="mt-8 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
+            <div class="bg-surface px-4 py-3">
+              <dt class="text-xs text-subtle">Test PASS</dt>
+              <dd class="mt-1 font-mono text-lg font-semibold text-heading">{statsData.tests.node.passed}<span class="text-xs font-normal text-subtle"> Node</span></dd>
+            </div>
+            <div class="bg-surface px-4 py-3">
+              <dt class="text-xs text-subtle">Eval</dt>
+              <dd class="mt-1 font-mono text-lg font-semibold text-heading">{statsData.eval.score}%</dd>
+            </div>
+            <div class="bg-surface px-4 py-3">
+              <dt class="text-xs text-subtle">Versi</dt>
+              <dd class="mt-1 font-mono text-lg font-semibold text-heading">{statsData.repo.version}</dd>
+            </div>
+            <div class="bg-surface px-4 py-3">
+              <dt class="text-xs text-subtle">Commit</dt>
+              <dd class="mt-1 font-mono text-sm font-semibold text-heading">{statsData.repo.lastCommit.sha}</dd>
+            </div>
+          </dl>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <Button href="#pasang" variant="primary" size="lg">Lihat cara pasang</Button>
+            <Button href={repoUrl} variant="outline" size="lg">Lihat kode</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section id="pasang" class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+          <div class="reveal">
+            <h2 class="text-2xl font-semibold tracking-tight text-heading sm:text-3xl">Cara pasang</h2>
+            <p class="mt-3 text-base leading-relaxed text-body">
+              Satu perintah. Salin dan jalankan di terminal proyek kamu.
+            </p>
+            <div class="mt-8">
+              <InstallPanel options={[{ id: 'cli', label: 'CLI', command: skill.install }]} defaultId="cli" />
+            </div>
+            <div class="mt-6 border-t border-line pt-6">
+              <h3 class="text-sm font-semibold text-heading">Pasang untuk agent tertentu</h3>
+              <p class="mt-1 text-sm text-body">Pilih agent yang kamu pakai — perintah disesuaikan otomatis.</p>
+              <div class="mt-4">
+                <InstallPanel
+                  options={agents.map((a) => ({ id: a.slug, label: a.name, command: installSkillCommand(a.slug, skill.name) }))}
+                  defaultId="claude-code"
+                />
+              </div>
+              <a href="/agents/" class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                Panduan lengkap per agent
+                <Icon name="arrow-right" size={14} />
+              </a>
+            </div>
+          </div>
+          <div class="reveal" style="transition-delay: 100ms">
+            <h2 class="text-2xl font-semibold tracking-tight text-heading sm:text-3xl">Setelah terpasang</h2>
+            <div class="mt-8">
+{usageSteps.map((step, i) => (
+            <div class="grid grid-cols-[2rem_1fr] gap-4 border-t border-line py-5">
+              <span class="flex h-8 w-8 items-center justify-center bg-accent-fill/10 text-accent">
+                <Icon name="check" size={16} />
+              </span>
+              <div>
+                <h3 class="text-sm font-semibold text-heading">{step.title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-body">{step.detail}</p>
+                {step.href && (
+                  <a
+                    href={step.href}
+                    class="mt-2 inline-flex items-center gap-1 text-sm font-medium text-accent"
+                  >
+                    {step.linkText}
+                    <Icon name="arrow-right" size={14} class="transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tags -->
+    <section class="border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="mr-2 text-sm font-medium text-body">Kategori</span>
+          {skill.tags.map((tag) => (
+            <span class="border border-line bg-surface px-3 py-1 font-mono text-xs text-subtle">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {skillContent && (
+      <section class="border-b border-line">
+        <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+          <div class="reveal max-w-2xl">
+            <span class="inline-flex items-center border border-line bg-surface px-3 py-1 text-xs font-medium text-body">
+              Dokumentasi
+            </span>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Isi SKILL.md</h2>
+            <p class="mt-3 text-base leading-relaxed text-body">
+              Isi lengkap dokumen skill, langsung dari repository. Baca cara kerja dan aturannya di sini — tanpa perlu membuka GitHub.
+            </p>
+          </div>
+          <div class="md-body reveal mt-10 max-w-3xl" set:html={mdHtml}></div>
+        </div>
+      </section>
+    )}
+
+    <!-- Related -->
+    <section class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div class="reveal max-w-2xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Sering dipakai bersama</h2>
+        </div>
+        <div class="mt-8 max-w-3xl">
+          {related.map((item, i) => (
+            <a
+              href={`/skills/${item.name}`}
+              class="reveal group grid gap-2 border-t border-line py-5 transition-colors hover:border-accent sm:grid-cols-[10rem_1fr_auto] sm:items-baseline"
+              style={`transition-delay: ${i * 60}ms`}
+            >
+              <span class="font-mono text-sm text-subtle">{item.name}</span>
+              <span class="text-sm leading-relaxed text-body">{item.description}</span>
+              <span class="hidden text-accent sm:inline-flex sm:items-center">
+                <Icon name="arrow-right" size={16} class="transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="relative overflow-hidden">
+      <div class="mx-auto max-w-3xl px-6 py-20 text-center lg:px-8">
+        <div class="reveal">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Pasang {skill.title}.</h2>
+          <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-body">
+            Butuh konteks sesi yang lebih lengkap? Pasang skill lain dari katalog untuk melengkapi alur kerja.
+          </p>
+          <div class="mx-auto mt-8 max-w-lg text-left">
+            <InstallPanel options={[{ id: 'cli', label: 'CLI', command: skill.install }]} defaultId="cli" />
+          </div>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button href="/#katalog" variant="outline" size="lg">Lihat semua skill</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div class="flex flex-col items-center justify-between gap-4 border-b border-line pb-8 sm:flex-row">
+          <a href="/" class="flex items-center gap-2" aria-label="Sactum Ark">
+            <span class="flex h-7 w-7 items-center justify-center bg-accent-fill font-mono text-sm font-bold text-accent-ink">S</span>
+            <span class="text-sm font-semibold tracking-tight text-heading">Sactum Ark</span>
+          </a>
+          <nav class="flex flex-wrap items-center justify-center gap-6 text-sm text-body">
+            <a href="/#alur" class="transition-colors hover:text-heading">Alur kerja</a>
+            <a href="/#katalog" class="transition-colors hover:text-heading">Katalog</a>
+            <a href="/agents/" class="transition-colors hover:text-heading">Setup di agent</a>
+          </nav>
+        </div>
+        <p class="mt-8 text-center text-xs text-subtle">Sactum Ark · 2026 · AI-native engineering</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const applyThemeIcons = () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      document.querySelectorAll('[data-theme-icon]').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        htmlEl.classList.toggle('hidden', htmlEl.dataset.themeIcon !== (isDark ? 'light' : 'dark'));
+      });
+    };
+    if (themeToggle) {
+      applyThemeIcons();
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('sactum-theme', next);
+        applyThemeIcons();
+      });
+    }
+
+    const copyText = (text: string) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise<void>((resolve) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        resolve();
+      });
+    };
+
+    document.querySelectorAll('[data-install-panel-root]').forEach((panelRoot) => {
+      const tabs = panelRoot.querySelectorAll('[data-install-tab]');
+      const panels = panelRoot.querySelectorAll('[data-install-panel]');
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const htmlTab = tab as HTMLElement;
+          const id = htmlTab.dataset.installTab;
+          tabs.forEach((t) => {
+            const htmlT = t as HTMLElement;
+            const active = htmlT.dataset.installTab === id;
+            htmlT.classList.toggle('bg-accent-fill/10', active);
+            htmlT.classList.toggle('text-accent', active);
+          });
+          panels.forEach((p) => {
+            const htmlP = p as HTMLElement;
+            htmlP.classList.toggle('hidden', htmlP.dataset.installPanel !== id);
+          });
+        });
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest('[data-copy]') || null;
+      if (!btn) return;
+      const htmlBtn = btn as HTMLElement;
+      const panelRoot = htmlBtn.closest('[data-install-panel-root]');
+      const active = panelRoot ? panelRoot.querySelector('[data-install-panel]:not(.hidden)') : null;
+      const text = active ? active.textContent.trim() : htmlBtn.getAttribute('data-copy-text');
+      if (!text) return;
+      copyText(text).then(() => {
+        const copyIcon = htmlBtn.querySelector('[data-copy-icon-copy]');
+        const doneIcon = htmlBtn.querySelector('[data-copy-icon-done]');
+        copyIcon?.classList.add('hidden');
+        doneIcon?.classList.remove('hidden');
+        setTimeout(() => {
+          doneIcon?.classList.add('hidden');
+          copyIcon?.classList.remove('hidden');
+        }, 1600);
+      });
+    });
+  </script>
+</Layout>

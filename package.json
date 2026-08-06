@@ -1,0 +1,27 @@
+{
+  "name": "sactum-ark-web",
+  "version": "1.0.0",
+  "description": "Website katalog untuk Sactum Ark",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fetch:skills": "node scripts/fetch-skills.mjs",
+    "fetch:stats": "node scripts/fetch-stats.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@phosphor-icons/core": "^2.1.1",
+    "astro": "^7.1.6",
+    "marked": "^18.0.9",
+    "tailwindcss": "^3.4.19"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

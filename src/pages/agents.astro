@@ -1,0 +1,276 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import InstallPanel from '../components/InstallPanel.astro';
+import { agents, autoDetectCommand, installAllCommand, repoUrl } from '../data/agents.js';
+
+const steps = [
+  { title: 'Pilih agent', detail: 'Pilih agent yang kamu pakai di daftar di bawah.' },
+  { title: 'Salin perintah', detail: 'Jalankan perintah pasang di terminal proyek atau global.' },
+  { title: 'Mulai kerja', detail: 'Skill otomatis muat. Sebutkan task yang relevan dan agent akan memakai skill-nya.' },
+];
+---
+
+<Layout title="Pasang di Agent | Sactum Ark" description="Panduan mengaktifkan skill Sactum Ark di Claude Code, Cursor, Windsurf, Gemini CLI, GitHub Copilot, dan OpenClaw.">
+  <main class="min-h-screen bg-base text-body">
+    <!-- Nav -->
+    <header class="sticky top-0 z-50 border-b border-line bg-base/85 backdrop-blur-md">
+      <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+        <a href="/" class="flex items-center gap-2" aria-label="Kembali ke beranda Sactum Ark">
+          <span class="flex h-7 w-7 items-center justify-center bg-accent-fill font-mono text-sm font-bold text-accent-ink">S</span>
+          <span class="text-sm font-semibold tracking-tight text-heading">Sactum Ark</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            data-theme-toggle
+            class="p-2 text-subtle transition-colors hover:text-heading"
+            aria-label="Ganti tema terang dan gelap"
+          >
+            <span data-theme-icon="light" class="hidden"><Icon name="sun" size={18} /></span>
+            <span data-theme-icon="dark" class="hidden"><Icon name="moon" size={18} /></span>
+          </button>
+          <a
+            href={repoUrl}
+            class="p-2 text-subtle transition-colors hover:text-heading"
+            aria-label="Buka repository GitHub"
+          >
+            <Icon name="github-logo" size={20} />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="border-b border-line bg-surface" aria-label="Breadcrumb">
+      <div class="mx-auto flex h-10 max-w-7xl items-center gap-2 px-6 text-sm text-subtle lg:px-8">
+        <a href="/" class="transition-colors hover:text-heading">Home</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-body">Setup di agent</span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+        <div class="reveal max-w-3xl">
+          <span class="inline-flex items-center border border-line bg-surface px-3 py-1 text-xs font-medium text-body">
+            Panduan aktivasi
+          </span>
+          <h1 class="mt-6 text-3xl font-semibold tracking-tight text-heading sm:text-4xl lg:text-5xl">
+            Aktifkan skill di agent kamu.
+          </h1>
+          <p class="mt-5 text-base leading-relaxed text-body sm:text-lg">
+            Satu repo, 12 skill, dan perintah per-agent yang siap disalin. Pilih agent di bawah, jalankan perintahnya, dan skill langsung aktif di setiap sesi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {steps.map((step, i) => (
+            <div class="reveal grid grid-cols-[2rem_1fr] gap-4" style={`transition-delay: ${i * 60}ms`}>
+              <span class="flex h-8 w-8 items-center justify-center bg-accent-fill/10 font-mono text-sm font-semibold text-accent">0{i + 1}</span>
+              <div>
+                <h2 class="text-sm font-semibold text-heading">{step.title}</h2>
+                <p class="mt-1 text-sm leading-relaxed text-body">{step.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Agents -->
+    <section class="border-b border-line">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div class="reveal max-w-2xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Pilih agent</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            Perintah ini memasang semua 12 skill sekaligus ke satu agent. Tab CLI-nya sudah sesuai — tinggal salin.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {agents.map((agent) => (
+            <article
+              id={agent.slug}
+              class="reveal flex flex-col border border-line bg-surface p-6 transition-colors hover:border-accent"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-base font-semibold leading-tight text-heading">{agent.name}</h3>
+                  <p class="mt-0.5 font-mono text-xs text-subtle">--agent {agent.slug}</p>
+                </div>
+                {agent.docs && (
+                  <a
+                    href={agent.docs}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group inline-flex items-center gap-1 text-xs font-medium text-accent"
+                  >
+                    Dokumen
+                    <Icon name="arrow-up-right" size={14} class="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                )}
+              </div>
+
+              <p class="mt-3 text-sm leading-relaxed text-body">{agent.note}</p>
+
+              <div class="mt-5">
+                <InstallPanel options={[{ id: 'cli', label: 'CLI', command: installAllCommand(agent.slug) }]} defaultId="cli" />
+              </div>
+
+              <div class="mt-5 grid gap-2 border-t border-line pt-4">
+                <div class="flex items-center justify-between gap-3">
+                  <span class="text-xs text-subtle">Scope project</span>
+                  <code class="font-mono text-xs text-body">{agent.path}</code>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <span class="text-xs text-subtle">Scope global</span>
+                  <code class="font-mono text-xs text-body">{agent.globalPath}</code>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Auto-detect -->
+    <section class="border-b border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div class="reveal max-w-2xl">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Tidak yakin agent mana?</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            CLI <code class="font-mono text-sm">npx skills</code> ini mendeteksi agent yang terpasang di mesin kamu, lalu memasang semua skill ke semuanya.
+          </p>
+          <div class="mt-8 max-w-lg text-left">
+            <InstallPanel options={[{ id: 'cli', label: 'CLI', command: autoDetectCommand }]} defaultId="cli" />
+          </div>
+          <div class="mt-8">
+            <Button href="/#katalog" variant="outline" size="lg">
+              Lihat semua skill
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="pasang" class="relative overflow-hidden">
+      <div class="mx-auto max-w-3xl px-6 py-20 text-center lg:px-8">
+        <div class="reveal">
+          <h2 class="text-3xl font-semibold tracking-tight text-heading sm:text-4xl">Pasang sekarang.</h2>
+          <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-body">
+            Salin perintah di bawah, jalankan di terminal, dan semua skill terpasang untuk semua agent yang terdeteksi.
+          </p>
+          <div class="mx-auto mt-8 max-w-lg text-left">
+            <InstallPanel options={[{ id: 'cli', label: 'CLI', command: autoDetectCommand }]} defaultId="cli" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div class="flex flex-col items-center justify-between gap-4 border-b border-line pb-8 sm:flex-row">
+          <a href="/" class="flex items-center gap-2" aria-label="Sactum Ark">
+            <span class="flex h-7 w-7 items-center justify-center bg-accent-fill font-mono text-sm font-bold text-accent-ink">S</span>
+            <span class="text-sm font-semibold tracking-tight text-heading">Sactum Ark</span>
+          </a>
+          <nav class="flex flex-wrap items-center justify-center gap-6 text-sm text-body">
+            <a href="/#alur" class="transition-colors hover:text-heading">Alur kerja</a>
+            <a href="/#katalog" class="transition-colors hover:text-heading">Katalog</a>
+          </nav>
+        </div>
+        <p class="mt-8 text-center text-xs text-subtle">Sactum Ark · 2026 · AI-native engineering</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const applyThemeIcons = () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      document.querySelectorAll('[data-theme-icon]').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        htmlEl.classList.toggle('hidden', htmlEl.dataset.themeIcon !== (isDark ? 'light' : 'dark'));
+      });
+    };
+    if (themeToggle) {
+      applyThemeIcons();
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('sactum-theme', next);
+        applyThemeIcons();
+      });
+    }
+
+    const copyText = (text: string) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise<void>((resolve) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        resolve();
+      });
+    };
+
+    document.querySelectorAll('[data-install-panel-root]').forEach((panelRoot) => {
+      const tabs = panelRoot.querySelectorAll('[data-install-tab]');
+      const panels = panelRoot.querySelectorAll('[data-install-panel]');
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const htmlTab = tab as HTMLElement;
+          const id = htmlTab.dataset.installTab;
+          tabs.forEach((t) => {
+            const htmlT = t as HTMLElement;
+            const active = htmlT.dataset.installTab === id;
+            htmlT.classList.toggle('bg-accent-fill/10', active);
+            htmlT.classList.toggle('text-accent', active);
+          });
+          panels.forEach((p) => {
+            const htmlP = p as HTMLElement;
+            htmlP.classList.toggle('hidden', htmlP.dataset.installPanel !== id);
+          });
+        });
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest('[data-copy]') || null;
+      if (!btn) return;
+      const htmlBtn = btn as HTMLElement;
+      const panelRoot = htmlBtn.closest('[data-install-panel-root]');
+      const active = panelRoot ? panelRoot.querySelector('[data-install-panel]:not(.hidden)') : null;
+      const text = active ? active.textContent.trim() : htmlBtn.getAttribute('data-copy-text');
+      if (!text) return;
+      copyText(text).then(() => {
+        const copyIcon = htmlBtn.querySelector('[data-copy-icon-copy]');
+        const doneIcon = htmlBtn.querySelector('[data-copy-icon-done]');
+        copyIcon?.classList.add('hidden');
+        doneIcon?.classList.remove('hidden');
+        setTimeout(() => {
+          doneIcon?.classList.add('hidden');
+          copyIcon?.classList.remove('hidden');
+        }, 1600);
+      });
+    });
+  </script>
+</Layout>
