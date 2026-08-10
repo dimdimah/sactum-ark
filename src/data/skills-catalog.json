@@ -60,7 +60,7 @@
     "topic": "verify",
     "icon": "flask",
     "title": "TDD Workflow",
-    "description": "Gunakan skill ini ketika user meminta membuat fitur baru yang melibatkan logika transaksi, perhitungan, stok, atau business logic yang kompleks — di mana bug dapat lolos tanpa test otomatis. Skill ini memaksa AI mengikuti siklus TDD yang ketat: RED (tulis test yang gagal dulu), GREEN (tulis implementasi minimum agar test pass), REFACTOR (rapikan kode). Ada guardrail yang mencegah AI \"curang\" melewatkan testing dengan alasan \"ini sederhana\". Trigger: \"buat feature\", \"implementasi logika bisnis\", \"fitur perhitungan\", \"stok\", \"TDD\", \"test-first\", \"tdd workflow\".",
+    "description": "'Gunakan skill ini ketika user meminta membuat fitur baru yang melibatkan logika transaksi, perhitungan, stok, atau business logic yang kompleks — di mana bug dapat lolos tanpa test otomatis. Skill ini memaksa AI mengikuti siklus TDD yang ketat: RED (tulis test yang gagal dulu), GREEN (tulis implementasi minimum agar test pass), REFACTOR (rapikan kode). Ada guardrail yang mencegah AI \"curang\" melewatkan testing dengan alasan \"ini sederhana\". Trigger: \"buat feature\", \"implementasi logika bisnis\", \"fitur perhitungan\", \"stok\", \"TDD\", \"test-first\", \"tdd workflow\".'",
     "tags": [
       "tdd",
       "testing",
@@ -74,7 +74,7 @@
     "topic": "verify",
     "icon": "check-circle",
     "title": "Verification Loop",
-    "description": "Gunakan skill ini setiap kali sebelum menganggap kerjaan \"selesai\" — otomatis menjalankan checklist verifikasi: syntax/type check, test suite, lint, security scan dasar, performa baseline. Berfungsi sebagai reviewer otomatis yang memastikan tidak ada kode yang di-deploy dalam kondisi broken, tidak ter-test, atau ada vulnerability. Trigger: \"selesai ya?\", \"siap deploy\", \"cek sebelum push\", \"verification\", \"pre-deploy checklist\", \"code review otomatis\".",
+    "description": "'Gunakan skill ini setiap kali sebelum menganggap kerjaan \"selesai\" — otomatis menjalankan checklist verifikasi: syntax/type check, test suite, lint, security scan dasar, performa baseline. Berfungsi sebagai reviewer otomatis yang memastikan tidak ada kode yang di-deploy dalam kondisi broken, tidak ter-test, atau ada vulnerability. Trigger: \"selesai ya?\", \"siap deploy\", \"cek sebelum push\", \"verification\", \"pre-deploy checklist\", \"code review otomatis\".'",
     "tags": [
       "verification",
       "quality",
@@ -88,7 +88,7 @@
     "topic": "verify",
     "icon": "browser",
     "title": "Webapp Testing",
-    "description": "Gunakan skill ini ketika perlu menguji aplikasi web dari end-to-end — mensimulasikan user yang klik, isi form, navigate, dan memverifikasi alur kerja dari awal sampai akhir. Cocok untuk memastikan fitur dengan banyak role/akses (siapa boleh lihat/edit apa) benar-benar jalan sesuai aturan, bukan cuma \"keliatan jalan\" pas dicoba manual. Trigger: \"e2e test\", \"web testing\", \"playwright\", \"cypress\", \"end to end\", \"test alur user\", \"role based testing\".",
+    "description": "'Gunakan skill ini ketika perlu menguji aplikasi web dari end-to-end — mensimulasikan user yang klik, isi form, navigate, dan memverifikasi alur kerja dari awal sampai akhir. Cocok untuk memastikan fitur dengan banyak role/akses (siapa boleh lihat/edit apa) benar-benar jalan sesuai aturan, bukan cuma \"keliatan jalan\" pas dicoba manual. Trigger: \"e2e test\", \"web testing\", \"playwright\", \"cypress\", \"end to end\", \"test alur user\", \"role based testing\".'",
     "tags": [
       "e2e",
       "testing",
@@ -102,7 +102,7 @@
     "topic": "planning",
     "icon": "database",
     "title": "Domain Modeling",
-    "description": "Gunakan skill ini sebelum mulai ngoding untuk memodelkan entitas data dan relasinya — apa objek/objek utamanya, gimana hubungan antar objek, aturan bisnis apa yang berlaku. Ini proses mental yang dipakai buat bikin ERD atau data model, sekaligus latihan berpikir seperti System Analyst. Trigger: \"ERD\", \"data model\", \"entitas\", \"relationship\", \"domain modeling\", \"entity relationship\", \"sebelum ngoding\", \"desain dulu\".",
+    "description": "'Gunakan skill ini sebelum mulai ngoding untuk memodelkan entitas data dan relasinya — apa objek/objek utamanya, gimana hubungan antar objek, aturan bisnis apa yang berlaku. Ini proses mental yang dipakai buat bikin ERD atau data model, sekaligus latihan berpikir seperti System Analyst. Trigger: \"ERD\", \"data model\", \"entitas\", \"relationship\", \"domain modeling\", \"entity relationship\", \"sebelum ngoding\", \"desain dulu\".'",
     "tags": [
       "domain",
       "erd",
@@ -116,7 +116,7 @@
     "topic": "planning",
     "icon": "clipboard-text",
     "title": "Planning Workflow",
-    "description": "Gunakan skill ini ketika user punya ide/requirement yang masih mentah dan perlu diubah jadi rencana implementasi yang terstruktur — dari PRD (Product Requirement Document) sampai breakdown task, asumsi, risiko, urutan eksekusi. Skill ini merger dari to-prd + writing-plans, cocok untuk latihan berpikir sebagai Business Analyst/System Analyst. Trigger: \"PRD\", \"product requirement\", \"rencana implementasi\", \"implementation plan\", \"deskripsikan kebutuhan\", \"breakdown task\", \"before coding\", \"to PRD\", \"writing plan\".",
+    "description": "'Gunakan skill ini ketika user punya ide/requirement yang masih mentah dan perlu diubah jadi rencana implementasi yang terstruktur — dari PRD (Product Requirement Document) sampai breakdown task, asumsi, risiko, urutan eksekusi. Skill ini merger dari to-prd + writing-plans, cocok untuk latihan berpikir sebagai Business Analyst/System Analyst. Trigger: \"PRD\", \"product requirement\", \"rencana implementasi\", \"implementation plan\", \"deskripsikan kebutuhan\", \"breakdown task\", \"before coding\", \"to PRD\", \"writing plan\".'",
     "tags": [
       "planning",
       "prd",
@@ -130,7 +130,7 @@
     "topic": "team",
     "icon": "archive",
     "title": "Strategic Compact",
-    "description": "Gunakan skill ini untuk meringkas dan menyimpan konteks penting selama sesi kerja panjang — keputusan yang sudah diambil, batasan yang ditemukan, pilihan arsitektur. Ini mencegah AI \"lupa\" atau kualitas jawabannya menurun karena context terlalu penuh. Cocok untuk task yang memakan banyak file dan sesi. Trigger: \"kompakkan konteks\", \"simpan keputusan penting\", \"apa saja yang sudah dipilih\", \"strategic compact\", \"compact context\", \"summary keputusan\".",
+    "description": "'Gunakan skill ini untuk meringkas dan menyimpan konteks penting selama sesi kerja panjang — keputusan yang sudah diambil, batasan yang ditemukan, pilihan arsitektur. Ini mencegah AI \"lupa\" atau kualitas jawabannya menurun karena context terlalu penuh. Cocok untuk task yang memakan banyak file dan sesi. Trigger: \"kompakkan konteks\", \"simpan keputusan penting\", \"apa saja yang sudah dipilih\", \"strategic compact\", \"compact context\", \"summary keputusan\".'",
     "tags": [
       "compact",
       "context",
@@ -144,7 +144,7 @@
     "topic": "build",
     "icon": "bug",
     "title": "Systematic Debugging",
-    "description": "Gunakan skill ini untuk pendekatan debugging yang terstruktur — mempersempit kemungkinan penyebab satu per satu berdasarkan bukti, bukan asal coba-coba ganti kode sampai kebetulan jalan. Melatih pola pikir menelusuri akar masalah. Trigger: \"bug\", \"error\", \"debug\", \"gagal\", \"kenapa ini error\", \"systematic debugging\", \"investigate error\", \"root cause\".",
+    "description": "'Gunakan skill ini untuk pendekatan debugging yang terstruktur — mempersempit kemungkinan penyebab satu per satu berdasarkan bukti, bukan asal coba-coba ganti kode sampai kebetulan jalan. Melatih pola pikir menelusuri akar masalah. Trigger: \"bug\", \"error\", \"debug\", \"gagal\", \"kenapa ini error\", \"systematic debugging\", \"investigate error\", \"root cause\".'",
     "tags": [
       "debugging",
       "bug",
@@ -158,7 +158,7 @@
     "topic": "docs",
     "icon": "chart-line",
     "title": "Diagram Generator",
-    "description": "Gunakan skill ini ketika perlu membuat diagram UML (Use Case, Class, Sequence, Activity, ER Diagram) untuk visualisasi kebutuhan, arsitektur, atau alur sistem. Skill ini menghasilkan sintaks Mermaid.js yang bisa dirender langsung di GitHub, Notion, VS Code, atau markdown viewer lain. Trigger: \"diagram\", \"UML\", \"use case diagram\", \"class diagram\", \"sequence diagram\", \"activity diagram\", \"ERD\", \"entity relationship\", \"bisa gambarkan\", \"visualisasikan\".",
+    "description": "'Gunakan skill ini ketika perlu membuat diagram UML (Use Case, Class, Sequence, Activity, ER Diagram) untuk visualisasi kebutuhan, arsitektur, atau alur sistem. Skill ini menghasilkan sintaks Mermaid.js yang bisa dirender langsung di GitHub, Notion, VS Code, atau markdown viewer lain. Trigger: \"diagram\", \"UML\", \"use case diagram\", \"class diagram\", \"sequence diagram\", \"activity diagram\", \"ERD\", \"entity relationship\", \"bisa gambarkan\", \"visualisasikan\".'",
     "tags": [
       "diagram",
       "uml",
