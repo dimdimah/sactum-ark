@@ -1,22 +1,22 @@
 {
   "source": "dimdimah/project-ai-skills-skill",
   "sourceUrl": "https://github.com/dimdimah/project-ai-skills-skill",
-  "generatedAt": "2026-08-06T03:03:44.886Z",
+  "generatedAt": "2026-08-10T00:55:47.189Z",
   "repo": {
     "name": "project-orchestrator-skill",
     "version": "1.0.0",
-    "skills": 12,
+    "skills": 13,
     "lastCommit": {
-      "sha": "bf1da9d",
-      "iso": "2026-08-05T15:34:16+07:00",
-      "dateLabel": "2026-08-05",
-      "message": "docs: fix pause note to reference actual commit e094a12"
+      "sha": "ea9614a",
+      "iso": "2026-08-06T20:21:08+07:00",
+      "dateLabel": "2026-08-06",
+      "message": "feat: add product-copy skill for generating web app content (microcopy, pages, SEO meta)"
     }
   },
   "tests": {
     "node": {
-      "total": 499,
-      "passed": 497,
+      "total": 530,
+      "passed": 530,
       "failed": 0
     },
     "python": {
@@ -28,10 +28,10 @@
   },
   "eval": {
     "score": 100,
-    "queriesMatched": 50,
-    "queriesTotal": 50,
-    "structuralPassed": 12,
-    "structuralTotal": 12,
+    "queriesMatched": 55,
+    "queriesTotal": 55,
+    "structuralPassed": 13,
+    "structuralTotal": 13,
     "ok": true
   }
 }
